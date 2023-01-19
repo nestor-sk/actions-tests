@@ -1,0 +1,17 @@
+name: Two taking a number and a JSON as input
+
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: "The number"
+        required: true
+        default: "0"
+
+jobs:
+  lint-deprecated:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read input and display
+        run: |
+          echo 'Number of deprecated fields: ${{ github.event.inputs.number }}'
