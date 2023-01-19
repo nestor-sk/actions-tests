@@ -1,12 +1,6 @@
-name: Two taking a number and a JSON as input
+name: Two
 
-on:
-  workflow_dispatch:
-    inputs:
-      number:
-        description: "The number"
-        required: true
-        default: "0"
+on: workflow_dispatch
 
 jobs:
   lint-deprecated:
