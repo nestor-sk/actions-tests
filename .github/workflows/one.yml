@@ -15,7 +15,6 @@ jobs:
   lint-deprecated:
     runs-on: ubuntu-latest
     steps:
-      #Read and print input
       - name: Read input and display
         run: |
           echo "Number of deprecated fields: ${{ github.event.inputs.number }}"
@@ -23,8 +22,7 @@ jobs:
           echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
           echo "Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}"
           echo "${{ github.event.inputs.report }}" > report.json
-      
-      - name: Display report.json
-       run: |
-         cat report.json
 
+      - name: Display report.json
+        run: |
+          cat report.json
