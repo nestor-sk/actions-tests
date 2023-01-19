@@ -19,15 +19,16 @@ jobs:
         run: |
           echo "Number of deprecated fields: ${{ github.event.inputs.number }}"
           echo "Report as comes: ${{ github.event.inputs.report }}"
-          echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
           echo "Report with toJSON: ${{ toJSON(github.event.inputs.report) }}"
-          echo "Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}"
-          echo "${{ github.event.inputs.report }}" > report.json
-          echo "${{ toJSON(fromJSON(github.event.inputs.report)) }}" > nice_report.json
-      - name: Display report.json
-        run: |
-          cat report.json
-      - name: Display nice_report.json
-        run: |
-          cat nice_report.json
-          cat nice_report.json | jq type
+          echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
+      # - name: Display report.json
+      #   run: |
+      #     cat report.json
+      # - name: Display nice_report.json
+      #   run: |
+      #     cat nice_report.json
+      #     cat nice_report.json | jq type
+
+# echo "Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}"
+#           echo "${{ github.event.inputs.report }}" > report.json
+#           echo "${{ toJSON(fromJSON(github.event.inputs.report)) }}" > nice_report.json
