@@ -3,7 +3,7 @@ name: One taking a number and a JSON as input
 on:
   workflow_dispatch:
     inputs:
-      number::
+      number:
         description: "The number"
         required: true
         default: "0"
