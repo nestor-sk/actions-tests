@@ -1,0 +1,40 @@
+number_of_deprecated_fields=$(grep -o "Cruise" report.json | wc -l)
+string_report=$(cat report.json)
+curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
+-H 'Accept: application/vnd.github.v3+json' \
+-H 'Authorization: token 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' \
+-H 'Content-Type: application/json' \
+-d '{
+    "ref": "aBranch",
+    "inputs": {
+        "number": "$number_of_deprecated_fields",
+        "report": "$string_report"
+    }
+}'
+
+
+
+
+
+curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
+-H 'Accept: application/vnd.github.v3+json' \
+-H 'Authorization: token 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' \
+-H 'Content-Type: application/json' \
+-d '{
+    "ref": "aBranch",
+    "inputs": {
+        "number": "42",
+        "report": "{\n\"employees\":{\n\"employee\":[\n{\n\"id\":\"1\",\n\"firstName\":\"Tom\",\n\"lastName\":\"Cruise\",\n\"photo\":\"https://jsonformatter.org/img/tom-cruise.jpg\"\n},\n{\n\"id\":\"2\",\n\"firstName\":\"Maria\",\n\"lastName\":\"Sharapova\",\n\"photo\":\"https://jsonformatter.org/img/Maria-Sharapova.jpg\"\n},\n{\n\"id\":\"3\",\n\"firstName\":\"Robert\",\n\"lastName\":\"DowneyJr.\",\n\"photo\":\"https://jsonformatter.org/img/Robert-Downey-Jr.jpg\"\n}\n]\n}\n}"
+    }
+}'
+
+
+
+curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer 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"\
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -d '{"ref":"aBranch","inputs":{"number":"42","report":"{}"}}'
+  
+
+  
