@@ -17,15 +17,15 @@ jobs:
     steps:
       - name: Read input and display
         run: |
-          echo "Number of deprecated fields: ${{ github.event.inputs.number }}"
+          echo 'Number of deprecated fields: ${{ github.event.inputs.number }}''
           echo "====================="
-          echo "Report as comes: ${{ github.event.inputs.report }}"
+          echo 'Report as comes: ${{ github.event.inputs.report }}'
           echo "====================="
-          echo "Report with toJSON: ${{ toJSON(github.event.inputs.report) }}"
+          echo 'Report with toJSON: ${{ toJSON(github.event.inputs.report) }}
           echo "====================="
-          echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
+          echo 'Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}'
           echo "====================="
-          echo "Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}"
+          echo 'Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }};
           echo "====================="
       # - name: Display report.json
       #   run: |
