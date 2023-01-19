@@ -20,5 +20,6 @@ jobs:
         run: |
           echo "Number of deprecated fields: ${{ github.event.inputs.number }}"
           echo "Report as comes: ${{ github.event.inputs.report }}"
-          echo "Rreport as JSON:"
-          echo "${{ github.event.inputs.report }}" | jq .
+          echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
+          echo "Report as JSON:"
+          echo "${{ fromJSON(github.event.inputs.report) }}" | jq .
