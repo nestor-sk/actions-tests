@@ -29,3 +29,4 @@ jobs:
       - name: Display nice_report.json
         run: |
           cat nice_report.json
+          cat nice_report.json | jq type
