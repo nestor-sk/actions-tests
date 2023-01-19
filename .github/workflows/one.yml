@@ -22,5 +22,7 @@ jobs:
           echo "Report as comes: ${{ github.event.inputs.report }}"
           echo "Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}"
           echo "Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}"
+          echo "Report as JSON (after from-to):"
+          echo "${{ toJSON(fromJSON(github.event.inputs.report)) }}" | jq .
           echo "Report as JSON:"
-          echo "${{ fromJSON(github.event.inputs.report) }}" | jq .
+          echo "${{ github.event.inputs.report }}" | jq .
