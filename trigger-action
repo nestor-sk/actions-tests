@@ -1,14 +1,14 @@
 number_of_deprecated_fields=$(grep -o "Cruise" report.json | wc -l)
-string_report=$(cat report.json)
+string_report=$(jq '. | tostring' report.json)
 curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
 -H 'Accept: application/vnd.github.v3+json' \
--H 'Authorization: token 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' \
+-H 'Authorization: token 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' \
 -H 'Content-Type: application/json' \
 -d '{
     "ref": "aBranch",
     "inputs": {
-        "number": "$number_of_deprecated_fields",
-        "report": "$string_report"
+        "number": "'"$number_of_deprecated_fields"'",
+        "report": '"$string_report"'
     }
 }'
 
@@ -18,7 +18,7 @@ curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workf
 
 curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
 -H 'Accept: application/vnd.github.v3+json' \
--H 'Authorization: token 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' \
+-H 'Authorization: token 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' \
 -H 'Content-Type: application/json' \
 -d '{
     "ref": "aBranch",
@@ -32,7 +32,7 @@ curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workf
 
 curl -X POST 'https://api.github.com/repos/nestor-sk/actions-tests/actions/workflows/one.yml/dispatches' \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer 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"\
+  -H "Authorization: Bearer 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"\
   -H "X-GitHub-Api-Version: 2022-11-28" \
   -d '{"ref":"aBranch","inputs":{"number":"42","report":"{}"}}'
   
