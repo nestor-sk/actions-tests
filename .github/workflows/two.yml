@@ -1,6 +1,12 @@
 name: Two
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: "The number"
+        required: true
+        default: "0"
 
 jobs:
   lint-deprecated:
