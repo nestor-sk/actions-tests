@@ -1,4 +1,4 @@
-name: Two taking a number and a JSON as input
+name: Two
 
 on:
   workflow_dispatch:

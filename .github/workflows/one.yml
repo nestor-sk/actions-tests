@@ -3,7 +3,7 @@ name: One taking a number and a JSON as input
 on:
   workflow_dispatch:
     inputs:
-      number::
+      number:
         description: "The number"
         required: true
         default: "0"
@@ -15,10 +15,24 @@ jobs:
   lint-deprecated:
     runs-on: ubuntu-latest
     steps:
-      #Read and print input
       - name: Read input and display
         run: |
-          echo "Number of deprecated fields: ${{ github.event.inputs.number }}"
-          echo "Report as comes: ${{ github.event.inputs.report }}"
-          echo "Rreport as JSON:"
-          echo "${{ github.event.inputs.report }}" | jq .
+          echo 'Number of deprecated fields: ${{ github.event.inputs.number }}'
+          echo "====================="
+          echo 'Report as comes: ${{ github.event.inputs.report }}'
+          echo "====================="
+          echo 'Report with toJSON: ${{ toJSON(github.event.inputs.report) }}'
+          echo "====================="
+          echo 'Report with fromJSON: ${{ fromJSON(github.event.inputs.report) }}'
+          echo "====================="
+          echo 'Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}'
+          echo "====================="
+          echo '${{ toJSON(fromJSON(github.event.inputs.report)) }}' > nice_report.json
+      - name: Display nice_report.json
+        run: |
+          cat nice_report.json
+          cat nice_report.json | jq type
+
+#
+#           echo "${{ github.event.inputs.report }}" > report.json
+#           echo "${{ toJSON(fromJSON(github.event.inputs.report)) }}" > nice_report.json
