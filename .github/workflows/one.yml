@@ -27,13 +27,11 @@ jobs:
           echo "====================="
           echo 'Report with fromJSON-toJSON: ${{ toJSON(fromJSON(github.event.inputs.report)) }}'
           echo "====================="
-      # - name: Display report.json
-      #   run: |
-      #     cat report.json
-      # - name: Display nice_report.json
-      #   run: |
-      #     cat nice_report.json
-      #     cat nice_report.json | jq type
+          echo '${{ toJSON(fromJSON(github.event.inputs.report)) }}' > nice_report.json
+      - name: Display nice_report.json
+        run: |
+          cat nice_report.json
+          cat nice_report.json | jq type
 
 #
 #           echo "${{ github.event.inputs.report }}" > report.json
