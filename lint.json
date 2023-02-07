@@ -1,0 +1,32 @@
+[
+  {
+    "field": "the.field",
+    "file": "one.gql",
+    "line": 1,
+    "reason": "Use other.field instead."
+  },
+  {
+    "field": "the.field",
+    "file": "two.gql",
+    "line": 2,
+    "reason": "Use other.field instead."
+  },
+  {
+    "field": "the.field",
+    "file": "three.gql",
+    "line": 3,
+    "reason": "Use other.field instead."
+  },
+  {
+    "field": "the.field",
+    "file": "folder_with_spaces/one_copy.gql",
+    "line": 4,
+    "reason": "Use other.field instead."
+  },
+  {
+    "field": "the.field",
+    "file": "otherfile.gql",
+    "line": 5,
+    "reason": "Use other.field instead."
+  }
+]
