@@ -49,8 +49,3 @@ jobs:
       fail_new_deprecations: ${{ inputs.fail_new_deprecations }}
       annotate_deprecations: ${{ inputs.annotate_deprecations }}
     secrets: inherit
-
-  holi:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Holi"
