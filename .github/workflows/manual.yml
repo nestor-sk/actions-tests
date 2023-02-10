@@ -35,6 +35,7 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "Holi"
       - name: Trigger workflow
         uses: sketch-hq/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
         with:
