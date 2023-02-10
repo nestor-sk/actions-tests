@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger workflow
-        uses: .github/workflows/gql_new_deprecated_fields.yml@main
+        uses: sketch-hq/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
         with:
           lint_installer: ${{ github.event.inputs.lint_installer }}
           base_branch: ${{ github.event.inputs.base_branch }}
