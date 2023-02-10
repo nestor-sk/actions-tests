@@ -4,16 +4,11 @@ name: New deprecated graphql fields
 on:
   workflow_call:
     inputs:
-      lint_installer:
-        description: "URL of gql-lint installer"
-        required: false
-        type: string
-        default: "https://raw.githubusercontent.com/sketch-hq/gql-lint/main/install.sh"
       base_branch:
         description: "Base branch"
         required: true
         type: string
-        default: ${{ github.base_ref }}
+        default: ""
       schema_urls:
         description: "Schema URLs to lint, comma separated. E.g: https://graphql.sketch.cloud/api/graphql,https://payments.prod.sketch.com/payments/graphql"
         required: true
@@ -34,45 +29,61 @@ on:
         required: true
         type: boolean
         default: false
-      annotate_deprecations:
-        description: "Annotate the PR with deprecations"
-        required: true
-        type: boolean
-        default: false
 
 # ensures this workflow can run in parallel to the other workflows
 concurrency: gql_deprecated_fields
+
+# To write annotations to the PR
+permissions: 
+  checks: write
 
 jobs:
   checkNewDeprecatedFieldUsage:
     name: Check deprecated field usage
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Install gql-lint
-        run: curl ${{ inputs.lint_installer }} | /bin/bash -s -- v2
-        shell: bash
+        run: curl https://raw.githubusercontent.com/sketch-hq/gql-lint/main/install.sh | /bin/bash -s -- v2
 
       # Checkout the pr's branch
       - uses: actions/checkout@v3
 
-      # We need to set -f to avoid globbing of paths at this step
       - name: Generate gql-lint files command segment
         id: gql-lint-command-segment
-        shell: bash
         run: echo OUT=$(bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}") >> $GITHUB_OUTPUT
 
       - name: Find deprecated queries used in the PR branch
-        shell: bash
         run: gql-lint deprecation --output json ${{ steps.gql-lint-command-segment.outputs.OUT }} > /tmp/pr.json
 
       - name: Find all deprecated queries currently in use in the PR branch
-        shell: bash
         id: deprecated-fields
         run: |
           echo 'FIELDS<<EOF' >> $GITHUB_OUTPUT
           gql-lint deprecation ${{ steps.gql-lint-command-segment.outputs.OUT }} >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Get changed files
+        id: changed-files
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: "json"
+
+      - name: Save changed files JSON
+        run: echo '${{ steps.changed-files.outputs.added_modified }}' | jq . > /tmp/changed_files.json
+
+      - name: Generate annotations JSON
+        run: .github/scripts/transform_report_to_annotations.sh /tmp/pr.json /tmp/changed_files.json > /tmp/annotations.json
+
+      - name: Annotate files
+        uses: yuzutech/annotations-action@v0.4.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          title: "GraphQL Lint"
+          input: "/tmp/annotations.json"
 
       # Checkout branch we're planning to merge into
       - uses: actions/checkout@v3
@@ -80,13 +91,10 @@ jobs:
           ref: "${{ inputs.base_branch }}"
 
       - name: Find deprecated queries used in the base branch
-        shell: bash
-        run: |
-          gql-lint deprecation --output json ${{ steps.gql-lint-command-segment.outputs.OUT }} > /tmp/base.json
+        run: gql-lint deprecation --output json ${{ steps.gql-lint-command-segment.outputs.OUT }} > /tmp/base.json
 
       - name: Diff to find any new deprecated fields introduced by PR branch
         id: diff-fields
-        shell: bash
         run: |
           gql-lint diff /tmp/base.json /tmp/pr.json
           echo 'DIFF<<EOF' >> $GITHUB_OUTPUT
@@ -140,39 +148,4 @@ jobs:
 
       - name: Fail if new deprecated fields are found
         if: inputs.fail_new_deprecations && steps.diff-fields.outputs.DIFF != ''
-        run: |
-          echo ${{ inputs.fail_new_deprecations }} 
-          echo ${{ steps.diff-fields.outputs.DIFF != '' }}
-          echo "Failing workflow because new deprecated fields were found" && exit 1
-
-  # annotateDeprecations:
-  #   name: Annotate deprecations
-  #   runs-on: ubuntu-latest
-  #   if: ${{ inputs.annotate_deprecations == 'true' }}
-  #   needs: checkNewDeprecatedFieldUsage
-  #   steps:
-  #     - name: Get changed files
-  #       id: changed-files
-  #       uses: jitterbit/get-changed-files@v1
-  #       with:
-  #         format: "json"
-
-  #     - name: Save changed files JSON
-  #       run: |
-  #         echo '${{ steps.changed-files.outputs.added_modified }}' | jq . > changed_files.json
-  #         cat changed_files.json
-
-  #     # TODO: This step is just to simulate the output of gql-lint
-  #     - name: Save gql-lint JSON report
-  #       run: cat lint.json
-
-  #     - name: Generate annotations JSON
-  #       run: .github/scripts/transform_report_to_annotations.sh lint.json changed_files.json > annotations.json
-
-  #     - name: Annotate files
-  #       uses: yuzutech/annotations-action@v0.4.0
-  #       with:
-  #         # TODO: do we need to pass this in as an input too?
-  #         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-  #         title: "GraphQL Lint"
-  #         input: "annotations.json"
+        run: echo "Failing workflow because new deprecated fields were found" && exit 1

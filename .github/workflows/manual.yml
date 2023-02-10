@@ -3,11 +3,6 @@ name: Manual trigger for gql_new_deprecated_fields
 on:
   workflow_dispatch:
     inputs:
-      lint_installer:
-        description: "URL of gql-lint installer"
-        required: false
-        type: string
-        default: "https://raw.githubusercontent.com/sketch-hq/gql-lint/main/install.sh"
       base_branch:
         description: "Base branch"
         required: true
@@ -31,21 +26,14 @@ on:
         required: true
         type: boolean
         default: false
-      annotate_deprecations:
-        description: "Annotate the PR with deprecations"
-        required: true
-        type: boolean
-        default: false
 
 jobs:
   trigger:
     uses: nestor-sk/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
     with:
-      lint_installer: ${{ inputs.lint_installer }}
       base_branch: ${{ inputs.base_branch }}
       schema_urls: ${{ inputs.schema_urls }}
       query_files: ${{ inputs.query_files }}
       ignore_files: ${{ inputs.ignore_files }}
       fail_new_deprecations: ${{ inputs.fail_new_deprecations }}
-      annotate_deprecations: ${{ inputs.annotate_deprecations }}
     secrets: inherit
