@@ -55,7 +55,7 @@ jobs:
 
       - name: Generate gql-lint files command segment
         id: gql-lint-command-segment
-        run: echo OUT=$(bash .github/scripts/build_gql_lint_command.sh ${{ inputs.schema_urls }} ${{ inputs.query_files }} ${{ inputs.ignore_files }}) >> $GITHUB_OUTPUT
+        run: echo OUT=$(bash .github/scripts/build_gql_arguments.sh ${{ inputs.schema_urls }} ${{ inputs.query_files }} ${{ inputs.ignore_files }}) >> $GITHUB_OUTPUT
 
       # Checkout the pr's branch
       - uses: actions/checkout@v3
