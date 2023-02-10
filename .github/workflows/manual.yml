@@ -27,6 +27,10 @@ on:
         type: boolean
         default: false
 
+# To write annotations to the PR
+permissions: 
+  checks: write
+
 jobs:
   trigger:
     uses: nestor-sk/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
