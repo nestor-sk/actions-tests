@@ -15,17 +15,17 @@ on:
         type: string
         default: ${{ github.base_ref }}
       schema_urls:
-        description: "Schema URLs to lint. Each url in single quotes, separated by a comma. E.g: 'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql'"
+        description: "Schema URLs to lint, comma separated. E.g: https://graphql.sketch.cloud/api/graphql,https://payments.prod.sketch.com/payments/graphql"
         required: true
         type: string
-        default: "'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql','https://capacitor.prod.sketch.com/api/introspection'"
+        default: "https://graphql.sketch.cloud/api/graphql,https://payments.prod.sketch.com/payments/graphql,https://capacitor.prod.sketch.com/api/introspection"
       query_files:
-        description: "Paths of query files to lint. Each path in single quotes, separated by a comma. E.g: 'Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
+        description: "Paths of query files to lint, comma separated. E.g: Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql,Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql"
         required: true
         type: string
         default: ""
       ignore_files:
-        description: "Paths of files to ignore. Each path in single quotes, separated by a comma. E.g: './packages/gql-types/graphql/**/local.*.gql','other/path/**/*.graphql'"
+        description: "Paths of files to ignore, comma separated. E.g: ./packages/gql-types/graphql/**/local.*.gql,other/path/**/*.graphql"
         required: false
         type: string
         default: ""
@@ -55,7 +55,7 @@ jobs:
 
       # Checkout the pr's branch
       - uses: actions/checkout@v3
-      
+
       - name: Generate gql-lint files command segment
         id: gql-lint-command-segment
         run: echo OUT=$(bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}") >> $GITHUB_OUTPUT
