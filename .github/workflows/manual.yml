@@ -17,7 +17,7 @@ on:
       query_files:
         description: "Paths of query files to lint. Each path in single quotes, separated by a comma. E.g: 'Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
         required: true
-        default: ""
+        default: "'./**/*.gql','./**/*.graphql'"
       ignore_files:
         description: "Paths of files to ignore. Each path in single quotes, separated by a comma. E.g: './packages/gql-types/graphql/**/local.*.gql','other/path/**/*.graphql'"
         required: false
