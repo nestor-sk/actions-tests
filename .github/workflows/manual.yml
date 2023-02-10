@@ -10,14 +10,14 @@ on:
       base_branch:
         description: "Base branch"
         required: true
-        default: ${{ github.base_ref }}
+        default: main
       schema_urls:
         description: "Schema URLs to lint. Each url in single quotes, separated by a comma. E.g: 'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql'"
         default: "'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql','https://capacitor.prod.sketch.com/api/introspection'"
       query_files:
         description: "Paths of query files to lint. Each path in single quotes, separated by a comma. E.g: 'Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
         required: true
-        default: "'Modules/SketchCloudKit/Source/Resources/SketchQL\ Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
+        default: "'./**/*.gql','./**/*.graphql'"
       ignore_files:
         description: "Paths of files to ignore. Each path in single quotes, separated by a comma. E.g: './packages/gql-types/graphql/**/local.*.gql','other/path/**/*.graphql'"
         required: false
