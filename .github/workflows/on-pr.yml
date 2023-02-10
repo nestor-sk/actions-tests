@@ -5,6 +5,7 @@ on:
 # To write annotations to the PR
 permissions: 
   checks: write
+  pull-requests: write
 
 jobs:
   gql-lint:
