@@ -16,6 +16,8 @@ on:
         default: ${{ github.base_ref }}
       schema_urls:
         description: "Schema URLs to lint. Each url in single quotes, separated by a comma. E.g: 'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql'"
+        required: true
+        type: string
         default: "'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql','https://capacitor.prod.sketch.com/api/introspection'"
       query_files:
         description: "Paths of query files to lint. Each path in single quotes, separated by a comma. E.g: 'Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
