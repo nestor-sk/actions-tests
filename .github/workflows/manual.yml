@@ -32,17 +32,20 @@ on:
         default: "false"
 
 jobs:
+
   trigger:
+    uses: sketch-hq/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
+    with:
+      lint_installer: ${{ github.event.inputs.lint_installer }}
+      base_branch: ${{ github.event.inputs.base_branch }}
+      schema_urls: ${{ github.event.inputs.schema_urls }}
+      query_files: ${{ github.event.inputs.query_files }}
+      ignore_files: ${{ github.event.inputs.ignore_files }}
+      fail_new_deprecations: ${{ github.event.inputs.fail_new_deprecations }}
+      annotate_deprecations: ${{ github.event.inputs.annotate_deprecations }}
+    secrets: inherit
+  
+  holi:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Holi"
-      - name: Trigger workflow
-        uses: sketch-hq/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
-        with:
-          lint_installer: ${{ github.event.inputs.lint_installer }}
-          base_branch: ${{ github.event.inputs.base_branch }}
-          schema_urls: ${{ github.event.inputs.schema_urls }}
-          query_files: ${{ github.event.inputs.query_files }}
-          ignore_files: ${{ github.event.inputs.ignore_files }}
-          fail_new_deprecations: ${{ github.event.inputs.fail_new_deprecations }}
-          annotate_deprecations: ${{ github.event.inputs.annotate_deprecations }}
