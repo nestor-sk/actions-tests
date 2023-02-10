@@ -1,6 +1,7 @@
 #!/bin/bash
 # Usage: bash build_gql_arguments.sh 'schema 1','schema 2' 'query 1','query 2' 'ignore 1','ignore 2'
 # Prints --schema schema1 --schema schema2 --ignore ignore1 --ignore ignore2 query1 query2
+set -f # disable globbing
 
 echo $1
 echo $2
