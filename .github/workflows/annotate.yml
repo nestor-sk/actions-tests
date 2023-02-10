@@ -30,7 +30,7 @@ jobs:
         run: cat lint.json
 
       - name: Generate annotations JSON
-        run: .github/workflows/transform.sh lint.json changed_files.json > annotations.json
+        run: .github/scripts/transform.sh lint.json changed_files.json > annotations.json
 
       - name: Annotate files
         uses: yuzutech/annotations-action@v0.4.0
