@@ -53,16 +53,12 @@ jobs:
         run: curl ${{ inputs.lint_installer }} | /bin/bash -s -- v2
         shell: bash
 
-      - name: Generate gql-lint files command segment
-        id: gql-lint-command-segment
-        run: |
-          pwd
-          ls
-          echo $PWD
-          echo OUT=$(bash .github/scripts/build_gql_arguments.sh ${{ inputs.schema_urls }} ${{ inputs.query_files }} ${{ inputs.ignore_files }}) >> $GITHUB_OUTPUT
-
       # Checkout the pr's branch
       - uses: actions/checkout@v3
+      
+      - name: Generate gql-lint files command segment
+        id: gql-lint-command-segment
+        run: echo OUT=$(bash .github/scripts/build_gql_arguments.sh ${{ inputs.schema_urls }} ${{ inputs.query_files }} ${{ inputs.ignore_files }}) >> $GITHUB_OUTPUT
 
       - name: Find deprecated queries used in the PR branch
         shell: bash
