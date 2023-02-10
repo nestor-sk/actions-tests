@@ -139,7 +139,7 @@ jobs:
             - `${{ env.CAPACITOR_FILES }}`
 
       - name: Fail if new deprecated fields are found
-        if: ${{ inputs.fail_new_deprecations }} && ${{ steps.diff-fields.outputs.DIFF != '' }}
+        if: inputs.fail_new_deprecations && steps.diff-fields.outputs.DIFF != ''
         run: |
           echo ${{ inputs.fail_new_deprecations }} 
           echo ${{ steps.diff-fields.outputs.DIFF != '' }}
