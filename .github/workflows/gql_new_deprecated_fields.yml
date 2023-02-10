@@ -33,12 +33,12 @@ on:
         description: "Fail the workflow new deprecations are found"
         required: true
         type: boolean
-        default: "false"
+        default: false
       annotate_deprecations:
         description: "Annotate the PR with deprecations"
         required: true
         type: boolean
-        default: "false"
+        default: false
 
 # ensures this workflow can run in parallel to the other workflows
 concurrency: gql_deprecated_fields
