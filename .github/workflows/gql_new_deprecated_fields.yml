@@ -139,8 +139,11 @@ jobs:
             - `${{ env.CAPACITOR_FILES }}`
 
       - name: Fail if new deprecated fields are found
-        if: ${{ inputs.fail_new_deprecations == 'true' }} && ${{ steps.diff-fields.outputs.DIFF != '' }}
-        run: echo "Failing workflow because new deprecated fields were found" && exit 1
+        if: ${{ inputs.fail_new_deprecations }} && ${{ steps.diff-fields.outputs.DIFF != '' }}
+        run: |
+          echo ${{ inputs.fail_new_deprecations }} 
+          echo ${{ steps.diff-fields.outputs.DIFF != '' }}
+          echo "Failing workflow because new deprecated fields were found" && exit 1
 
   # annotateDeprecations:
   #   name: Annotate deprecations
