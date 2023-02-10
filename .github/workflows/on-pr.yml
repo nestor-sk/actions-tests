@@ -1,0 +1,18 @@
+name: run reusable workflow on pr's
+on:
+  pull_request:
+
+# To write annotations to the PR
+permissions: 
+  checks: write
+
+jobs:
+  gql-lint:
+    uses: nestor-sk/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
+    with:
+      base_branch: main
+      schema_urls: "https://graphql.sketch.cloud/api/graphql,https://payments.prod.sketch.com/payments/graphql,https://capacitor.prod.sketch.com/api/introspection"
+      query_files: "*.gql,**/*.gql"
+      ignore_files: "**/skip.*"
+      fail_new_deprecations: true
+    secrets: inherit
