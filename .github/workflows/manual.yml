@@ -6,10 +6,12 @@ on:
       lint_installer:
         description: "URL of gql-lint installer"
         required: false
+        type: string
         default: "https://raw.githubusercontent.com/sketch-hq/gql-lint/main/install.sh"
       base_branch:
         description: "Base branch"
         required: true
+        type: string
         default: main
       schema_urls:
         description: "Schema URLs to lint. Each url in single quotes, separated by a comma. E.g: 'https://graphql.sketch.cloud/api/graphql','https://payments.prod.sketch.com/payments/graphql'"
@@ -17,22 +19,25 @@ on:
       query_files:
         description: "Paths of query files to lint. Each path in single quotes, separated by a comma. E.g: 'Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql','Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql'"
         required: true
+        type: string
         default: "'./**/*.gql','./**/*.graphql'"
       ignore_files:
         description: "Paths of files to ignore. Each path in single quotes, separated by a comma. E.g: './packages/gql-types/graphql/**/local.*.gql','other/path/**/*.graphql'"
         required: false
+        type: string
         default: ""
       fail_new_deprecations:
         description: "Fail the workflow new deprecations are found"
         required: true
+        type: boolean
         default: "false"
       annotate_deprecations:
         description: "Annotate the PR with deprecations"
         required: true
+        type: boolean
         default: "false"
 
 jobs:
-
   trigger:
     uses: nestor-sk/actions-tests/.github/workflows/gql_new_deprecated_fields.yml@main
     with:
@@ -44,7 +49,7 @@ jobs:
       fail_new_deprecations: ${{ github.event.inputs.fail_new_deprecations }}
       annotate_deprecations: ${{ github.event.inputs.annotate_deprecations }}
     secrets: inherit
-  
+
   holi:
     runs-on: ubuntu-latest
     steps:
