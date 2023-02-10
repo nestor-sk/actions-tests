@@ -63,6 +63,7 @@ jobs:
       - name: Find deprecated queries used in the PR branch
         shell: bash
         run: |
+          echo ${{ steps.gql-lint-command-segment.outputs.OUT }}
           gql-lint deprecation --output json ${{ steps.gql-lint-command-segment.outputs.OUT }} > /tmp/pr.json
 
       - name: Find all deprecated queries currently in use in the PR branch
