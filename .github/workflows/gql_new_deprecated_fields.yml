@@ -59,8 +59,8 @@ jobs:
       - name: Generate gql-lint files command segment
         id: gql-lint-command-segment
         run: |
-        bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}"
-        echo OUT=$(bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}") >> $GITHUB_OUTPUT
+          bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}"
+          echo OUT=$(bash .github/scripts/build_gql_arguments.sh "${{ inputs.schema_urls }}" "${{ inputs.query_files }}" "${{ inputs.ignore_files }}") >> $GITHUB_OUTPUT
 
       - name: Find deprecated queries used in the PR branch
         shell: bash
