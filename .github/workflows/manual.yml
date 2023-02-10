@@ -20,7 +20,7 @@ on:
         description: "Paths of query files to lint, comma separated. E.g: Modules/SketchCloudKit/Source/Resources/SketchQL Queries/SketchQL/**/*.graphql,Modules/SharedEditing/Resources/CapacitorQL/**/*.graphql"
         required: true
         type: string
-        default: "../**/*"
+        default: "**/*"
       ignore_files:
         description: "Paths of files to ignore, comma separated. E.g: ./packages/gql-types/graphql/**/local.*.gql,other/path/**/*.graphql"
         required: false
