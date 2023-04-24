@@ -22,6 +22,7 @@ jobs:
           ref: main
           path: other
           token: ${{ secrets.ACTION_TOKEN }}
+          persist-credentials: true
       - name: Create commit in other
         run: |
           cd other
