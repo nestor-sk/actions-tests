@@ -40,6 +40,7 @@ jobs:
       - name: Create PR in other repo
         uses: peter-evans/create-pull-request@v5
         with:
+          path: other
           token: ${{ secrets.ACTION_TOKEN_2 }}
           commit-message: "Web web-renderer release ${{ github.ref_name }}"
           title: "Web web-renderer release ${{ github.ref_name }}"
