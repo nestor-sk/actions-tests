@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
           ref: main
           path: other
-          token: ${{ secrets.ACTION_TOKEN }}
+          token: ${{ secrets.ACTION_TOKEN_2 }}
           persist-credentials: true
       - name: Create commit in other
         run: |
