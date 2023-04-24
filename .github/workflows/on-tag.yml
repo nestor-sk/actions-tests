@@ -21,6 +21,7 @@ jobs:
           fetch-depth: 0
           ref: main
           path: other
+          token: ${{ secrets.ACTION_TOKEN }}
       - name: Create commit in other
         run: |
           cd other
