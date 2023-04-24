@@ -24,18 +24,28 @@ jobs:
           #this token has to have write access to multiple things: actions, commits and other I can't remember now
           token: ${{ secrets.ACTION_TOKEN_2 }}
           persist-credentials: true #I think this the default value
-      - name: Create commit in other
+      - name: Modify other repo
         run: |
-          cd other
-          git checkout -b web-renderer-${{ github.ref_name }}
-          cp ../this/stuff.txt stuff.txt
-          git config user.name web-renderer-releaser
-          git config user.email nestor@sketch.com
-          git add .
-          git commit -m "Web web-renderer-releaser release ${{ github.ref_name }}"
-          git push origin web-renderer-${{ github.ref_name }}
-      # - name: Create PR in other
-      #   uses: peter-evans/create-pull-request@v5
+          cp this/stuff.txt other/stuff.txt
+      # - name: Create commit in other
+      #   run: |
+      #     cd other
+      #     git checkout -b web-renderer-${{ github.ref }}
+      #     cp ../this/stuff.txt stuff.txt
+      #     git config user.name web-renderer-releaser
+      #     git config user.email nestor@sketch.com
+      #     git add .
+      #     git commit -m "Web web-renderer-releaser release ${{ github.ref }}"
+      #     git push origin web-renderer-${{ github.ref }}
+      - name: Create PR in other repo
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.ACTION_TOKEN_2 }}
+          commit-message: "Web web-renderer release ${{ github.ref_name }}"
+          title: "Web web-renderer release ${{ github.ref_name }}"
+          branch: web-renderer-${{ github.ref_name }}
+          base: main
+
 
 
 
