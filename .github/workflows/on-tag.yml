@@ -30,7 +30,7 @@ jobs:
           git config user.email nestor@sketch.com
           git add .
           git commit -m "New web renderer release"
-          git push origin/new-web-renderer-release
+          git push origin new-web-renderer-release
       # - name: Create PR in other
       #   uses: peter-evans/create-pull-request@v5
 
