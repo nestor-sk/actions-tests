@@ -27,13 +27,13 @@ jobs:
       - name: Create commit in other
         run: |
           cd other
-          git checkout -b web-renderer-${{ github.ref }}
+          git checkout -b web-renderer-${{ github.ref_name }}
           cp ../this/stuff.txt stuff.txt
           git config user.name web-renderer-releaser
           git config user.email nestor@sketch.com
           git add .
-          git commit -m "Web web-renderer-releaser release ${{ github.ref }}"
-          git push origin web-renderer-${{ github.ref }}
+          git commit -m "Web web-renderer-releaser release ${{ github.ref_name }}"
+          git push origin web-renderer-${{ github.ref_name }}
       # - name: Create PR in other
       #   uses: peter-evans/create-pull-request@v5
 
