@@ -18,12 +18,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: nestor-sk/gobuf
-          fetch-depth: 0
+          #fetch-depth: 0
           ref: main
           path: other
-          #this token has to have write access to multiple things: actions, commits and other I can't remember now
-          #token: ${{ secrets.ACTION_TOKEN_2 }}
-          # persist-credentials: true #I think this the default value
       - name: Modify other repo
         run: |
           cp this/stuff.txt other/stuff.txt
