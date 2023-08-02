@@ -12,7 +12,7 @@ jobs:
     
           commands: | # list of commands, specified as a valid JSON string
             [
-              { "command": "appendData", "args": { "worksheetTitle": "gha-raw", "data": [["A1", "A2", "A3"]] }}
+              { "command": "appendData", "args": { "worksheetTitle": "gha-raw", minCol: 1, "data": [["A1", "A2", "A3"]] }}
             ]
         env:
           GSHEET_CLIENT_EMAIL: ${{ secrets.GSHEET_CLIENT_EMAIL }}
