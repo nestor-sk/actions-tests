@@ -9,11 +9,10 @@ jobs:
         uses: jroehl/gsheet.action@v2.1.0
         with:
           spreadsheetId: 1paS5iKVR7JcyVmLe2-ztCBkdpE14oQlieA1Nl6qakOM
+          worksheetTitle: gha-raw
           commands: | # list of commands, specified as a valid JSON string
             [
-              { "command": "addWorksheet", "args": { "worksheetTitle": "newSheet" }},
-              { "command": "updateData", "args": { "data": [["A1", "A2", "A3"]] }},
-              { "command": "getData", "args": { "range": "'newSheet'!A2:B3" } }
+              { "command": "updateData", "args": { "data": [["A1", "A2", "A3"]] }}
             ]
         env:
           GSHEET_CLIENT_EMAIL: ${{ secrets.GSHEET_CLIENT_EMAIL }}
