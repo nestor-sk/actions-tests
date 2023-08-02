@@ -14,7 +14,7 @@ jobs:
           #   [
           #     { "command": "appendData", "args": { "worksheetTitle": "gha-raw", "minCol": 1, "data": [["A1", "A2", "A3"], ["b1", "b2", "b3"]] }}
           #   ]
-          commands: ${{ env.CMDS }}
+          commands: ${{ vars.CMDS }}
         env:
           GSHEET_CLIENT_EMAIL: ${{ secrets.GSHEET_CLIENT_EMAIL }}
           GSHEET_PRIVATE_KEY: ${{ secrets.GSHEET_PRIVATE_KEY }}
